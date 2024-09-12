@@ -72,7 +72,8 @@ User::create([
      */
     public function edit(string $id)
     {
-        //
+        $users = User::find($id);
+        return view('update',compact('users'));
     }
 
     /**
@@ -80,7 +81,22 @@ User::create([
      */
     public function update(Request $request, string $id)
     {
-        //
+        $user = User::find($id);
+
+            if($request->hasFile('photo')){
+
+                $image_path = public_path("storage/"). $user->FileName;
+                if(file_exists($image_path)){
+                    @unlink($image_path);
+                }
+                
+        $path = $request->photo->store('image','public');
+
+        $user->FileName = $path;
+        $user->save();
+        return redirect()->route('user.index')->with('delete','User Image Update Successfully.');
+            }
+
     }
 
     /**
@@ -92,11 +108,9 @@ User::create([
 
         $user->delete();
 
-        $image_path = public_path("storage/"). $user->file_name;
+        $image_path = public_path("storage/"). $user->FileName;
         if(file_exists($image_path)){
-
             @unlink($image_path);
-
         }
         return redirect()->route('user.index')->with('delete','User Image Delete Successfully.');
 

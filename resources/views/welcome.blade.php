@@ -67,7 +67,7 @@
         @method('DELETE')
         <button type="submit" class="btn btn-danger btn-sm mb-3">Delete</button>
     </form>
-    
+        <a href="{{route('user.edit',$user->id)}}" class="btn btn-warning">Update</a>
     @endforeach
     </div>
 </div>
