@@ -48,9 +48,11 @@
     </div>
 
 <div class="row">
+    <div class="col-2">
     @foreach ($users as $user)
-        
+        <img class="img-fluid img-thumbnail" src="{{asset('/storage/'.$user->FileName)}}" alt="" >
     @endforeach
+    </div>
 </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
