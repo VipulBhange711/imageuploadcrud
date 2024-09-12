@@ -88,6 +88,18 @@ User::create([
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::find($id);
+
+        $user->delete();
+
+        $image_path = public_path("storage/"). $user->file_name;
+        if(file_exists($image_path)){
+
+            @unlink($image_path);
+
+        }
+        return redirect()->route('user.index')->with('delete','User Image Delete Successfully.');
+
+
     }
 }

@@ -44,13 +44,30 @@
         @endif
     </div>
 </div> 
+<div class="row">
+    <div class="col-6">
+        @if (session('delete'))
+            <div class="alert alert-danger">
+                {{session('delete')}}
+            </div>
+        @endif
+    </div>
+</div> 
 
     </div>
 
 <div class="row">
     <div class="col-2">
     @foreach ($users as $user)
-        <img class="img-fluid img-thumbnail" src="{{asset('/storage/'.$user->FileName)}}" alt="" >
+        
+    <img class="img-fluid img-thumbnail" src="{{asset('/storage/'.$user->FileName)}}" alt="" >
+    
+    <form action="{{route('user.destroy',$user->id)}}" method="POST">
+        @csrf
+        @method('DELETE')
+        <button type="submit" class="btn btn-danger btn-sm mb-3">Delete</button>
+    </form>
+    
     @endforeach
     </div>
 </div>
